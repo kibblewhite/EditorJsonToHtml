@@ -25,12 +25,13 @@ public partial class Index
             },
             {
                 "type": "list",
-                "style": "list-group",
+                "style": "list-group list-group-flush",
                 "item-style": "list-group-item"
             },
             {
                 "type": "checklist",
-                "style": "general-style"
+                "style": "list-group",
+                "item-style": "list-group-item"
             },
             {
                 "type": "quote",

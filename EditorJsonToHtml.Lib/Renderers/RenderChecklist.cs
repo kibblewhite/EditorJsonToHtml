@@ -24,6 +24,11 @@ public static class RenderChecklist
         {
             render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "li");
 
+            if (css is not null && css.ItemStyle is not null)
+            {
+                render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "class", css.ItemStyle);
+            }
+
             // Render the checkbox
             render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "input");
             render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "type", "checkbox");
