@@ -4,12 +4,21 @@ namespace EditorJsonToHtml.Lib.Renderers;
 
 public static class RenderChecklist
 {
-    public static void Render(CustomRenderTreeBuilder render_tree_builder, List<EditorJsBlockContent>? items)
+    public static void Render(CustomRenderTreeBuilder render_tree_builder, string? id, List<EditorJsBlockContent>? items)
     {
         if (items == null) return;
 
         render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "ul");
+        render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "id", id);
         render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "style", "list-style-type: none;");
+
+        EditorJsStyling? css = render_tree_builder.EditorJsStylings.FirstOrDefault(item => item.Type == SupportedRenderers.Checklist && item.Id == id);
+        css ??= render_tree_builder.EditorJsStylings.FirstOrDefault(item => item.Type == SupportedRenderers.Checklist && item.Id == null);
+
+        if (css is not null)
+        {
+            render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "class", css.Style);
+        }
 
         foreach (EditorJsBlockContent item in items)
         {
@@ -32,7 +41,7 @@ public static class RenderChecklist
             // Check and render nested checklists
             if (item.Items != null && item.Items.Count > 0)
             {
-                Render(render_tree_builder, item.Items);
+                Render(render_tree_builder, id, item.Items);
             }
 
             render_tree_builder.Builder.CloseElement(); // Close the li

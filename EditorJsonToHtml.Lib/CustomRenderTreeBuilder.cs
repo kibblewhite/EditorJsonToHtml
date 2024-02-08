@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
+﻿using EditorJsonToHtml.Lib.Models;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace EditorJsonToHtml.Lib;
 
 public class CustomRenderTreeBuilder
 {
+    public required IReadOnlyList<EditorJsStyling> EditorJsStylings { get; init; }
     public required RenderTreeBuilder Builder { get; init; }
 
     /// <summary>

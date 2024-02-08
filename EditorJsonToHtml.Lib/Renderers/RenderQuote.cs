@@ -2,11 +2,25 @@
 
 public static class RenderQuote
 {
-    public static void Render(CustomRenderTreeBuilder render_tree_builder, string? text, string? caption, string? alignment)
+    public static void Render(CustomRenderTreeBuilder render_tree_builder, string? id, string? text, string? caption, string? alignment)
     {
         render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "blockquote");
+        render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "id", id);
 
-        if (!string.IsNullOrEmpty(alignment))
+        Models.EditorJsStyling? css = render_tree_builder.EditorJsStylings.FirstOrDefault(item => item.Type == SupportedRenderers.Quote && item.Id == id);
+        css ??= render_tree_builder.EditorJsStylings.FirstOrDefault(item => item.Type == SupportedRenderers.Quote && item.Id == null);
+
+        if (css is not null && !string.IsNullOrEmpty(alignment))
+        {
+            render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "class", $"text-{alignment} {css.Style}");
+        }
+
+        if (css is not null && string.IsNullOrEmpty(alignment))
+        {
+            render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "class", css.Style);
+        }
+
+        if (css is null && !string.IsNullOrEmpty(alignment))
         {
             render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "class", $"text-{alignment}");
         }
@@ -16,6 +30,12 @@ public static class RenderQuote
         if (!string.IsNullOrEmpty(caption))
         {
             render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "footer");
+
+            if (css is not null && css.FooterStyle is not null)
+            {
+                render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "class", css.FooterStyle);
+            }
+
             render_tree_builder.Builder.AddMarkupContent(render_tree_builder.SequenceCounter, caption);
             render_tree_builder.Builder.CloseElement(); // Close the footer
         }

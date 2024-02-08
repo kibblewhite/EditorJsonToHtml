@@ -2,11 +2,20 @@
 
 public static class RenderTable
 {
-    public static void Render(CustomRenderTreeBuilder render_tree_builder, bool withHeadings, List<List<string?>>? content)
+    public static void Render(CustomRenderTreeBuilder render_tree_builder, string? id, bool withHeadings, List<List<string?>>? content)
     {
         if (content == null) return;
 
         render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "table");
+        render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "id", id);
+
+        Models.EditorJsStyling? css = render_tree_builder.EditorJsStylings.FirstOrDefault(item => item.Type == SupportedRenderers.Table && item.Id == id);
+        css ??= render_tree_builder.EditorJsStylings.FirstOrDefault(item => item.Type == SupportedRenderers.Table && item.Id == null);
+
+        if (css is not null)
+        {
+            render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "class", css.Style);
+        }
 
         if (withHeadings)
         {

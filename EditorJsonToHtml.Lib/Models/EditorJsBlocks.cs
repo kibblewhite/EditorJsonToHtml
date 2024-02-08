@@ -3,7 +3,7 @@
 namespace EditorJsonToHtml.Lib.Models;
 
 // Define classes for deserialization
-public class EditorJsBlocks
+public sealed class EditorJsBlocks
 {
     [JsonPropertyName("time")]
     public long? Time { get; set; }

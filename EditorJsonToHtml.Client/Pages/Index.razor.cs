@@ -1,6 +1,54 @@
 namespace EditorJsonToHtml.Client.Pages;
 public partial class Index
 {
+    public static readonly string EditorStyling = """
+        [
+            {
+                "type": "header",
+                "level": 1,
+                "style": "specific-style",
+                "id": "KgrM3aNM-n"
+            },
+            {
+                "type": "header",
+                "level": 3,
+                "style": "general-style"
+            },
+            {
+                "type": "paragraph",
+                "style": "specific-style",
+                "id": "NaTtEbbeRT"
+            },
+            {
+                "type": "paragraph",
+                "style": "general-style"
+            },
+            {
+                "type": "list",
+                "style": "list-group",
+                "item-style": "list-group-item"
+            },
+            {
+                "type": "checklist",
+                "style": "general-style"
+            },
+            {
+                "type": "quote",
+                "style": "blockquote",
+                "footer-style": "blockquote-footer"
+            },
+            {
+                "type": "table",
+                "style": "table table-hover"
+            },
+            {
+                "type": "table",
+                "style": "table table-striped",
+                "id": "zOGIbPv7kl"
+            }
+        ]
+        """;
+
     public static readonly string EditorJson = """
         {
           "time": 1707325917682,
@@ -10,7 +58,7 @@ public partial class Index
               "type": "header",
               "data": {
                 "text": "<mark class=\"cdx-marker\"><a href=\"http://google.com\">Heylo</a></mark>",
-                "level": 3
+                "level": 1
               }
             },
             {
@@ -18,6 +66,14 @@ public partial class Index
               "type": "paragraph",
               "data": {
                 "text": "Heylo World"
+              }
+            },
+            {
+              "id": "KgrM3aNM-n",
+              "type": "header",
+              "data": {
+                "text": "Second header",
+                "level": 3
               }
             },
             {

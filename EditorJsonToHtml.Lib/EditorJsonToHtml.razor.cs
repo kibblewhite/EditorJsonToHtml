@@ -13,6 +13,9 @@ public partial class EditorJsonToHtml : ComponentBase
     [Parameter]
     public required string EditorJson { get; set; }
 
+    [Parameter]
+    public required string EditorStyling { get; set; }
+
     [Inject]
     public required ILogger<EditorJsonToHtml> logger { get; set; }
 
@@ -27,19 +30,32 @@ public partial class EditorJsonToHtml : ComponentBase
     {
 
         EditorJsBlocks? blocks;
+        IEnumerable<EditorJsStyling>? editor_js_stylings; 
+
         try
         {
             blocks = JsonSerializer.Deserialize<EditorJsBlocks>(EditorJson);
         }
         catch (Exception ex)
         {
-            logger.LogTrace("Deserialise EditorJson Failed: {Exception}", ex.Message);
+            logger.LogTrace("Deserialise EditorJsBlocks Failed: {Exception}", ex.Message);
+            throw;
+        }
+
+        try
+        {
+            editor_js_stylings = JsonSerializer.Deserialize<IEnumerable<EditorJsStyling>>(EditorStyling);
+        }
+        catch (Exception ex)
+        {
+            logger.LogTrace("Deserialise EditorJsStyling Failed: {Exception}", ex.Message);
             throw;
         }
 
         CustomRenderTreeBuilder custom_render_tree_builder = new()
         {
-            Builder = builder
+            Builder = builder,
+            EditorJsStylings = editor_js_stylings?.ToList().AsReadOnly() ?? Enumerable.Empty<EditorJsStyling>().ToList().AsReadOnly()
         };
 
         foreach (EditorJsBlock block in blocks?.Blocks ?? Enumerable.Empty<EditorJsBlock>())
@@ -58,22 +74,22 @@ public partial class EditorJsonToHtml : ComponentBase
         switch (renderer)
         {
             case SupportedRenderers.Paragraph:
-                RenderParagraph.Render(render_tree_builder, block?.Data?.Text);
+                RenderParagraph.Render(render_tree_builder, block.Id, block.Data?.Text);
                 break;
             case SupportedRenderers.Header:
-                RenderHeader.Render(render_tree_builder, block?.Data?.Text, block?.Data?.Level);
+                RenderHeader.Render(render_tree_builder, block.Id, block?.Data?.Text, block?.Data?.Level);
                 break;
             case SupportedRenderers.List:
-                RenderList.Render(render_tree_builder, block?.Data?.Style, block?.Data?.Items);
+                RenderList.Render(render_tree_builder, block.Id, block?.Data?.Style, block?.Data?.Items);
                 break;
             case SupportedRenderers.Quote:
-                RenderQuote.Render(render_tree_builder, block?.Data?.Text, block?.Data?.Caption, block?.Data?.Alignment);
+                RenderQuote.Render(render_tree_builder, block.Id, block?.Data?.Text, block?.Data?.Caption, block?.Data?.Alignment);
                 break;
             case SupportedRenderers.Checklist:
-                RenderChecklist.Render(render_tree_builder, block?.Data?.Items);
+                RenderChecklist.Render(render_tree_builder, block.Id, block?.Data?.Items);
                 break;
             case SupportedRenderers.Table:
-                RenderTable.Render(render_tree_builder, block?.Data?.WithHeadings ?? false, block?.Data?.Content);
+                RenderTable.Render(render_tree_builder, block.Id, block?.Data?.WithHeadings ?? false, block?.Data?.Content);
                 break;
         }
     }
