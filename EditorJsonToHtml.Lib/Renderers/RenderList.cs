@@ -8,11 +8,11 @@ public static class RenderList
     {
         if (items == null) return;
 
-        render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter++, style == "ordered" ? "ol" : "ul");
+        render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, style == "ordered" ? "ol" : "ul");
 
         foreach (EditorJsBlockContent item in items)
         {
-            render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter++, "li"); // Added "li" element name
+            render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "li"); // Added "li" element name
 
             // Render item content
             render_tree_builder.RenderListItemContent(item);
@@ -33,17 +33,17 @@ public static class RenderList
     {
         if (item.Content != null)
         {
-            render_tree_builder.Builder.AddMarkupContent(render_tree_builder.SequenceCounter++, item.Content);
+            render_tree_builder.Builder.AddMarkupContent(render_tree_builder.SequenceCounter, item.Content);
         }
     }
 
     private static void RenderNestedList(this CustomRenderTreeBuilder render_tree_builder, List<EditorJsBlockContent> items)
     {
-        render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter++, "ul");
+        render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "ul");
 
         foreach (EditorJsBlockContent subItem in items)
         {
-            render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter++, "li"); // Added "li" element name
+            render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "li"); // Added "li" element name
             render_tree_builder.RenderListItemContent(subItem);
             if (subItem.Items is not null)
             {
