@@ -39,8 +39,7 @@ public partial class EditorJsonToHtml : ComponentBase
 
         CustomRenderTreeBuilder custom_render_tree_builder = new()
         {
-            Builder = builder,
-            SequenceCounter = 0
+            Builder = builder
         };
 
         foreach (EditorJsBlock block in blocks?.Blocks ?? Enumerable.Empty<EditorJsBlock>())
