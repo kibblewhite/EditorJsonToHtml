@@ -2,7 +2,7 @@
 
 public static class RenderHeader
 {
-    public static void Render(CustomRenderTreeBuilder render_tree_builder, string? id, string? text, int? level)
+    public static void Render(CustomRenderTreeBuilder render_tree_builder, string? id, int? level, string? text)
     {
         render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, $"h{level}");
         render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "id", id);

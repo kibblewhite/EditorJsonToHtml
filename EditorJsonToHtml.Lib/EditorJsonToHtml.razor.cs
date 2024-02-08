@@ -77,7 +77,7 @@ public partial class EditorJsonToHtml : ComponentBase
                 RenderParagraph.Render(render_tree_builder, block.Id, block.Data?.Text);
                 break;
             case SupportedRenderers.Header:
-                RenderHeader.Render(render_tree_builder, block.Id, block?.Data?.Text, block?.Data?.Level);
+                RenderHeader.Render(render_tree_builder, block.Id, block?.Data?.Level, block?.Data?.Text);
                 break;
             case SupportedRenderers.List:
                 RenderList.Render(render_tree_builder, block.Id, block?.Data?.Style, block?.Data?.Items);
