@@ -2,7 +2,7 @@
 
 namespace EditorJsonToHtml.Lib.Models;
 
-public class EditorJsBlockContent
+public sealed class EditorJsBlockContent
 {
     [JsonPropertyName("content")]
     public string? Content { get; set; }
