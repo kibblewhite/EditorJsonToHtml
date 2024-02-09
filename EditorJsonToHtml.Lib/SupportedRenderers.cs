@@ -29,7 +29,10 @@ public enum SupportedRenderers
     Delimiter,
 
     [StringValue(nameof(Warning))]
-    Warning
+    Warning,
+
+    [StringValue(nameof(Embed))]
+    Embed
 }
 
 [AttributeUsage(AttributeTargets.Field)]

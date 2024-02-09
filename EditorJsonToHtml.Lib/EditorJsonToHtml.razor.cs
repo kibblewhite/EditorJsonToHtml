@@ -100,6 +100,9 @@ public partial class EditorJsonToHtml : ComponentBase
             case SupportedRenderers.Warning:
                 RenderWarning.Render(render_tree_builder, block);
                 break;
+            case SupportedRenderers.Embed:
+                RenderEmbed.Render(render_tree_builder, block);
+                break;
         }
     }
 }
