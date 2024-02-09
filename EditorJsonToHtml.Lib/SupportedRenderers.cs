@@ -20,7 +20,16 @@ public enum SupportedRenderers
     Checklist,
 
     [StringValue(nameof(Table))]
-    Table
+    Table,
+
+    [StringValue(nameof(Image))]
+    Image,
+
+    [StringValue(nameof(Delimiter))]
+    Delimiter,
+
+    [StringValue(nameof(Warning))]
+    Warning
 }
 
 [AttributeUsage(AttributeTargets.Field)]

@@ -1,9 +1,15 @@
-﻿namespace EditorJsonToHtml.Lib.Renderers;
+﻿using EditorJsonToHtml.Lib.Models;
 
-public static class RenderHeader
+namespace EditorJsonToHtml.Lib.Renderers;
+
+public sealed class RenderHeader : IBlockRenderer
 {
-    public static void Render(CustomRenderTreeBuilder render_tree_builder, string? id, int? level, string? text)
+    public static void Render(CustomRenderTreeBuilder render_tree_builder, EditorJsBlock block)
     {
+        string? id = block.Id;
+        int? level = block?.Data?.Level;
+        string? text = block?.Data?.Text;
+
         render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, $"h{level}");
         render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "id", id);
 

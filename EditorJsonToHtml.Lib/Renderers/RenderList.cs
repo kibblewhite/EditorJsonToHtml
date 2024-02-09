@@ -2,11 +2,16 @@
 
 namespace EditorJsonToHtml.Lib.Renderers;
 
-public static class RenderList
+public sealed class RenderList : IBlockRenderer
 {
-    public static void Render(CustomRenderTreeBuilder render_tree_builder, string? id, string? style, List<EditorJsBlockContent>? items)
+    public static void Render(CustomRenderTreeBuilder render_tree_builder, EditorJsBlock block)
     {
-        if (items == null) return;
+
+        string? id = block.Id;
+        string? style = block?.Data?.Style;
+        List<EditorJsBlockContent>? items = block?.Data?.Items;
+
+        if (items == null) { return; }
 
         render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, style == "ordered" ? "ol" : "ul");
         render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "id", id);
@@ -29,12 +34,12 @@ public static class RenderList
             }
 
             // Render item content
-            render_tree_builder.RenderListItemContent(item);
+            RenderList.RenderListItemContent(render_tree_builder, item);
 
             // Check and render nested lists
             if (item.Items != null && item.Items.Count > 0)
             {
-                render_tree_builder.RenderNestedList(item.Items);
+                RenderList.RenderNestedList(render_tree_builder, item.Items);
             }
 
             render_tree_builder.Builder.CloseElement(); // Closes "li" element
@@ -43,7 +48,7 @@ public static class RenderList
         render_tree_builder.Builder.CloseElement(); // Closes "ol" or "ul" element
     }
 
-    private static void RenderListItemContent(this CustomRenderTreeBuilder render_tree_builder, EditorJsBlockContent item)
+    private static void RenderListItemContent(CustomRenderTreeBuilder render_tree_builder, EditorJsBlockContent item)
     {
         if (item.Content != null)
         {
@@ -51,17 +56,17 @@ public static class RenderList
         }
     }
 
-    private static void RenderNestedList(this CustomRenderTreeBuilder render_tree_builder, List<EditorJsBlockContent> items)
+    private static void RenderNestedList(CustomRenderTreeBuilder render_tree_builder, List<EditorJsBlockContent> items)
     {
         render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "ul");
 
         foreach (EditorJsBlockContent subItem in items)
         {
             render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "li"); // Added "li" element name
-            render_tree_builder.RenderListItemContent(subItem);
+            RenderList.RenderListItemContent(render_tree_builder, subItem);
             if (subItem.Items is not null)
             {
-                render_tree_builder.RenderNestedList(subItem.Items);
+                RenderList.RenderNestedList(render_tree_builder, subItem.Items);
             }
 
             render_tree_builder.Builder.CloseElement(); // Closes "li" element

@@ -74,22 +74,31 @@ public partial class EditorJsonToHtml : ComponentBase
         switch (renderer)
         {
             case SupportedRenderers.Paragraph:
-                RenderParagraph.Render(render_tree_builder, block.Id, block.Data?.Text);
+                RenderParagraph.Render(render_tree_builder, block);
                 break;
             case SupportedRenderers.Header:
-                RenderHeader.Render(render_tree_builder, block.Id, block?.Data?.Level, block?.Data?.Text);
+                RenderHeader.Render(render_tree_builder, block);
                 break;
             case SupportedRenderers.List:
-                RenderList.Render(render_tree_builder, block.Id, block?.Data?.Style, block?.Data?.Items);
+                RenderList.Render(render_tree_builder, block);
                 break;
             case SupportedRenderers.Quote:
-                RenderQuote.Render(render_tree_builder, block.Id, block?.Data?.Text, block?.Data?.Caption, block?.Data?.Alignment);
+                RenderQuote.Render(render_tree_builder, block);
                 break;
             case SupportedRenderers.Checklist:
-                RenderChecklist.Render(render_tree_builder, block.Id, block?.Data?.Items);
+                RenderChecklist.Render(render_tree_builder, block);
                 break;
             case SupportedRenderers.Table:
-                RenderTable.Render(render_tree_builder, block.Id, block?.Data?.WithHeadings ?? false, block?.Data?.Content);
+                RenderTable.Render(render_tree_builder, block);
+                break;
+            case SupportedRenderers.Image:
+                RenderImage.Render(render_tree_builder, block);
+                break;
+            case SupportedRenderers.Delimiter:
+                RenderDelimiter.Render(render_tree_builder, block);
+                break;
+            case SupportedRenderers.Warning:
+                RenderWarning.Render(render_tree_builder, block);
                 break;
         }
     }

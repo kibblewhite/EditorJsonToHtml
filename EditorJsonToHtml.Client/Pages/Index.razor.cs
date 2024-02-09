@@ -46,6 +46,10 @@ public partial class Index
                 "type": "table",
                 "style": "table table-striped",
                 "id": "zOGIbPv7kl"
+            },
+            {
+                "type": "image",
+                "style": "img-fluid"
             }
         ]
         """;
@@ -219,6 +223,27 @@ public partial class Index
                     "B2"
                   ]
                 ]
+              }
+            },
+            {
+              "type": "image",
+              "data": {
+                "url": "https://www.tesla.com/tesla_theme/assets/img/_vehicle_redesign/roadster_and_semi/roadster/hero.jpg",
+                "caption": "Roadster // tesla.com",
+                "withBorder": true,
+                "withBackground": false,
+                "stretched": true
+              }
+            },
+            {
+              "type" : "delimiter",
+              "data" : {}
+            },
+            {
+              "type": "warning",
+              "data": {
+                "title": "Note:",
+                "message": "Avoid using this method just for lulz. It can be very dangerous opposite your daily fun stuff."
               }
             }
           ],

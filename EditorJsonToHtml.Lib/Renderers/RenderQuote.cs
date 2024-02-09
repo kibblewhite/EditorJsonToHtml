@@ -1,9 +1,16 @@
-﻿namespace EditorJsonToHtml.Lib.Renderers;
+﻿using EditorJsonToHtml.Lib.Models;
 
-public static class RenderQuote
+namespace EditorJsonToHtml.Lib.Renderers;
+
+public sealed class RenderQuote : IBlockRenderer
 {
-    public static void Render(CustomRenderTreeBuilder render_tree_builder, string? id, string? text, string? caption, string? alignment)
+    public static void Render(CustomRenderTreeBuilder render_tree_builder, EditorJsBlock block)
     {
+        string? id = block.Id;
+        string? text = block?.Data?.Text;
+        string? caption = block?.Data?.Caption;
+        string? alignment = block?.Data?.Alignment;
+
         render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "blockquote");
         render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "id", id);
 

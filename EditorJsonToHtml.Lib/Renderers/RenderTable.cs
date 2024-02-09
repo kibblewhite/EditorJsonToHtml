@@ -1,10 +1,16 @@
-﻿namespace EditorJsonToHtml.Lib.Renderers;
+﻿using EditorJsonToHtml.Lib.Models;
 
-public static class RenderTable
+namespace EditorJsonToHtml.Lib.Renderers;
+
+public sealed class RenderTable : IBlockRenderer
 {
-    public static void Render(CustomRenderTreeBuilder render_tree_builder, string? id, bool withHeadings, List<List<string?>>? content)
+    public static void Render(CustomRenderTreeBuilder render_tree_builder, EditorJsBlock block)
     {
-        if (content == null) return;
+        string? id = block.Id;
+        bool withHeadings = block?.Data?.WithHeadings ?? false;
+        List<List<string?>>? content = block?.Data?.Content;
+
+        if (content == null) { return; }
 
         render_tree_builder.Builder.OpenElement(render_tree_builder.SequenceCounter, "table");
         render_tree_builder.Builder.AddAttribute(render_tree_builder.SequenceCounter, "id", id);
