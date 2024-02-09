@@ -245,6 +245,21 @@ public partial class Index
                 "title": "Note:",
                 "message": "Avoid using this method just for lulz. It can be very dangerous opposite your daily fun stuff."
               }
+            },
+            {
+              "type" : "delimiter",
+              "data" : {}
+            },
+            {
+              "type" : "embed",
+              "data" : {
+                "service" : "coub",
+                "source" : "https://coub.com/view/1czcdf",
+                "embed" : "https://coub.com/embed/1czcdf",
+                "width" : 580,
+                "height" : 320,
+                "caption" : "My Life"
+              }
             }
           ],
           "version": "2.28.2"
