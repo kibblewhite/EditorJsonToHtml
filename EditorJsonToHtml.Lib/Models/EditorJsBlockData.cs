@@ -38,7 +38,7 @@ public sealed class EditorJsBlockData
     public List<List<string?>>? Content { get; set; }
 
     /// <summary>
-    /// Gets or sets the caption for quote or image blocks.
+    /// Gets or sets the caption for quote, image or embed blocks.
     /// </summary>
     [JsonPropertyName("caption")]
     public string? Caption { get; set; }
@@ -100,4 +100,36 @@ public sealed class EditorJsBlockData
     /// </summary>
     [JsonPropertyName("message")]
     public string? Message { get; set; }
+
+    // New properties for embed block
+
+    /// <summary>
+    /// Gets or sets the service associated with the embed block.
+    /// </summary>
+    [JsonPropertyName("service")]
+    public string? Service { get; set; }
+
+    /// <summary>
+    /// Gets or sets the source URL for the embed block.
+    /// </summary>
+    [JsonPropertyName("source")]
+    public string? Source { get; set; }
+
+    /// <summary>
+    /// Gets or sets the embed URL for the embed block.
+    /// </summary>
+    [JsonPropertyName("embed")]
+    public string? Embed { get; set; }
+
+    /// <summary>
+    /// Gets or sets the width of the embed block.
+    /// </summary>
+    [JsonPropertyName("width")]
+    public int? Width { get; set; }
+
+    /// <summary>
+    /// Gets or sets the height of the embed block.
+    /// </summary>
+    [JsonPropertyName("height")]
+    public int? Height { get; set; }
 }
