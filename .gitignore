@@ -396,4 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/EditorJsonToHtml.Client/wwwroot/lib/bootstrap
+/Solution Items/nuget-publish-command.md
+/EditorJsonToHtml.Client/wwwroot/lib

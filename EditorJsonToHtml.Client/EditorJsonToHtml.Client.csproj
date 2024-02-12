@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\EditorJsonToHtml.Lib\EditorJsonToHtml.Lib.csproj" />
+		<ProjectReference Include="..\EditorJsonToHtml.Lib\EditorJsonToHtml.Lib.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

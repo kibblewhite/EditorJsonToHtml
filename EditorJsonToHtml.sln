@@ -5,7 +5,14 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EditorJsonToHtml.Lib", "EditorJsonToHtml.Lib\EditorJsonToHtml.Lib.csproj", "{F23664BD-B54E-428A-83AA-F1A3E8CC7993}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorJsonToHtml.Client", "EditorJsonToHtml.Client\EditorJsonToHtml.Client.csproj", "{D2193BCB-AF93-465A-949C-DDB273BE4BBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EditorJsonToHtml.Client", "EditorJsonToHtml.Client\EditorJsonToHtml.Client.csproj", "{D2193BCB-AF93-465A-949C-DDB273BE4BBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2933B8FB-7EF7-4802-A8F4-B9F371822836}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
